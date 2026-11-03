@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>howzero 릴스 업로드 일정</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* Layout: OpenFunnel 틀 — 양옆 세로선 프레임, 가로선으로 나눈 섹션, 공지 바 → 내비 → 히어로(알림 스택) → 앱 창(일정·캡션·성과 탭) → 기능 카드 3장 */
+:root{
+  --background:#020202; --foreground:#fafafa; --card:#0b0b0b; --popover:#111; --muted:#161616; --muted-foreground:#a3a3a3;
+  --accent:#202020; --border:#292929; --input:#666; --primary:#2563eb; --primary-hover:#3b74f0; --ring:#93c5fd;
+  --ok:#4ade80; --radius:.625rem;
+  --sans:Geist,"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--background);color:var(--foreground);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ring);outline-offset:2px;border-radius:6px}
+.frame{max-width:1160px;margin:0 auto;border-left:1px solid var(--border);border-right:1px solid var(--border);min-height:100dvh}
+.sec{border-bottom:1px solid var(--border);padding:56px 40px}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.02em}
+
+/* 공지 바·내비 */
+.announce{display:flex;justify-content:center;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--border);font-size:13px}
+.tag{font-size:11px;font-weight:500;background:var(--muted);border:1px solid var(--border);border-radius:999px;padding:1px 8px;color:var(--muted-foreground)}
+nav.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5;background:color-mix(in oklab,var(--background) 86%,transparent);backdrop-filter:blur(12px)}
+.wordmark{display:inline-flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.18em;font-size:16px}
+.mark{width:26px;height:26px;border-radius:7px;background:#a9a6a0;color:#020202;display:grid;place-items:center;font:700 13px var(--sans);letter-spacing:0}
+.navlinks{display:flex;gap:22px;font-size:13px;color:var(--foreground)}
+.navlinks a{opacity:.9}.navlinks a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.navright{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background-color .15s,border-color .15s,transform .15s}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-hover)}
+.btn-outline{background:transparent;border-color:#4a4a4a}.btn-outline:hover{background:var(--muted)}
+.btn-ghost{background:transparent}.btn-ghost:hover{background:var(--muted)}
+.btn-lg{height:36px;padding:0 14px;font-size:14px}
+
+/* 히어로 */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:72px 80px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;border:1px solid var(--border);background:var(--card);border-radius:999px;padding:2px 10px}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:var(--foreground)}
+.hero h1{font-size:clamp(36px,5.4vw,58px);line-height:1.08;font-weight:600;margin:18px 0 18px}
+.hero p.lead{color:#cfcfcf;font-size:17px;max-width:30ch;margin:0 0 22px}
+.hero .actions{display:flex;gap:8px;flex-wrap:wrap}
+.connect{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px;font-size:13px;color:var(--muted-foreground)}
+.pillchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;color:var(--foreground)}
+
+.stack-head{display:flex;justify-content:space-between;font-size:13px;color:var(--muted-foreground);margin:0 4px 10px}
+.stack{display:grid;gap:10px}
+.note{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;min-width:0}
+.note.s2{margin-inline:10px}.note.s3{margin-inline:20px}
+.note-row{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+.note-row .meta{margin-left:auto;font-size:12px;color:var(--muted-foreground);font-weight:400;white-space:nowrap}
+.note p{margin:8px 0 0;color:#cfcfcf;font-size:13.5px}
+.note .acts{display:flex;justify-content:flex-end;gap:6px;margin-top:14px}
+.ig{width:16px;height:16px;flex:none}
+.bar{height:4px;border-radius:4px;background:var(--accent);margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--primary);border-radius:4px}
+
+/* 채널 줄 */
+.strip{text-align:center;padding-block:36px}
+.strip .cap{font-size:13px;color:var(--muted-foreground);margin-bottom:16px}
+.daysrow{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.daypill{display:grid;justify-items:center;gap:2px;min-width:74px;border:1px solid var(--border);border-radius:12px;padding:8px 10px;font-variant-numeric:tabular-nums}
+.daypill b{font-family:var(--mono);font-size:15px}
+.daypill span{font-size:12px;color:var(--muted-foreground)}
+.daypill.today{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in oklab,var(--primary) 25%,transparent)}
+
+/* 앱 창 */
+.sec h2{font-size:clamp(22px,2.6vw,28px);font-weight:600}
+.sub{color:var(--muted-foreground);margin:8px 0 0;font-size:15px}
+.window{margin-top:28px;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--background)}
+.chrome{position:relative;display:flex;align-items:center;justify-content:center;height:46px;border-bottom:1px solid var(--border)}
+.lights{position:absolute;left:16px;display:flex;gap:7px}.lights i{width:10px;height:10px;border-radius:50%;display:block}
+.urlpill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted-foreground);background:var(--card);border:1px solid var(--border);border-radius:999px;padding:4px 22px}
+.winbody{padding:22px 24px 28px}
+.winbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.winbar .hint{font-size:14px;color:var(--muted-foreground)}
+.seg{display:flex;justify-content:center;margin:18px 0 22px}
+.seg-in{display:inline-flex;gap:2px;background:var(--card);border:1px solid var(--border);border-radius:999px;padding:4px}
+.seg button{border:0;background:transparent;border-radius:999px;padding:6px 16px;font-size:14px;color:var(--muted-foreground);cursor:pointer}
+.seg button[aria-selected="true"]{background:var(--primary);color:#fff}
+.panel{display:none}.panel.on{display:block}
+
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;min-width:0}
+.box-head{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+.ico{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--muted);border:1px solid var(--border);flex:none}
+.tree{list-style:none;margin:12px 0 0 13px;padding:0 0 0 14px;border-left:1px solid var(--border);display:grid;gap:4px}
+.tree li{position:relative;display:flex;gap:10px;align-items:baseline;padding:6px 8px;border-radius:8px;cursor:pointer;font-size:14px}
+.tree li:hover,.tree li[aria-current="true"]{background:var(--muted)}
+.tree li::before{content:"";position:absolute;left:-14px;top:50%;width:10px;border-top:1px solid var(--border)}
+.tree .d{font-family:var(--mono);font-size:12.5px;color:var(--muted-foreground);width:46px;flex:none}
+.tree .t{min-width:0}
+.tree .tt{font-weight:500}
+.tree .st{display:block;font-size:12px;color:var(--muted-foreground)}
+.check{color:var(--ok);flex:none}
+
+.doc-tools{margin-left:auto;display:flex;align-items:center;gap:4px}
+.mini-seg{display:inline-flex;border:1px solid var(--border);border-radius:999px;padding:2px;font-size:12px}
+.mini-seg span{padding:2px 9px;border-radius:999px;color:var(--muted-foreground)}
+.mini-seg span.on{background:var(--muted);color:var(--foreground);border:1px solid var(--border)}
+.iconbtn{width:28px;height:28px;display:grid;place-items:center;border-radius:7px;border:0;background:transparent;cursor:pointer;color:var(--muted-foreground)}
+.iconbtn:hover{background:var(--muted);color:var(--foreground)}
+.doc{margin-top:12px;background:var(--background);border-radius:12px;padding:18px 20px;min-height:220px}
+.doc h3{font-size:16px;font-weight:600;margin-bottom:10px}
+.doc p{margin:0 0 12px;color:#e5e5e5;font-size:14.5px}
+.doc pre{margin:0;white-space:pre-wrap;word-break:keep-all;font:14px/1.75 var(--sans);color:#e5e5e5}
+.doc .kv{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.doc .kv span{font-size:12px;border:1px solid var(--border);border-radius:999px;padding:2px 10px;color:var(--muted-foreground)}
+.doc-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;font-size:12.5px;color:var(--muted-foreground)}
+.toast{font-size:12px;color:var(--ok)}
+
+/* 성과 */
+.perf{display:grid;gap:10px}
+.prow{display:grid;grid-template-columns:52px 34px minmax(0,1fr) 84px;gap:12px;align-items:center;font-size:14px}
+.prow .d{font-family:var(--mono);font-size:12.5px;color:var(--muted-foreground)}
+.prow .e{font-family:var(--mono);font-size:12px;border:1px solid var(--border);border-radius:6px;text-align:center;padding:1px 0}
+.prow .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.ptitle{min-width:0}
+.ptitle a{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ptitle a:hover{text-decoration:underline;text-underline-offset:3px}
+.ptrack{height:4px;background:var(--accent);border-radius:4px;margin-top:6px;overflow:hidden}
+.ptrack i{display:block;height:100%;background:var(--primary)}
+.small{font-size:12.5px;color:var(--muted-foreground);margin:14px 0 0}
+
+/* 기능 카드 */
+.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.feat{border:1px solid var(--border);border-radius:16px;padding:20px;background:var(--card)}
+.feat h3{font-size:16px;font-weight:600;margin:12px 0 6px}
+.feat p{margin:0;color:var(--muted-foreground);font-size:14px}
+.feat .num{font-family:var(--mono);font-size:12px;color:var(--muted-foreground)}
+footer{padding:28px 40px;font-size:12.5px;color:var(--muted-foreground);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:40px}
+  .split{grid-template-columns:1fr}
+  .feats{grid-template-columns:1fr}
+  .navlinks{display:none}
+}
+@media (max-width:560px){
+  .sec{padding:40px 16px}
+  .hero{padding-block:44px 52px}
+  nav.top{padding:12px 14px}
+  .announce{font-size:12px}
+  .winbody{padding:16px 14px 20px}
+  .note.s2{margin-inline:6px}.note.s3{margin-inline:12px}
+  .prow{grid-template-columns:44px 30px minmax(0,1fr) 62px;gap:8px}
+  footer{padding:24px 16px}
+  .navright .btn-ghost{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="announce"><span class="tag">공지</span><span>편집 끝난 릴스 5편, 오늘부터 하루 한 편 올려요 →</span></div>
+
+  <nav class="top" aria-label="메뉴">
+    <a class="wordmark" href="#top"><span class="mark" aria-hidden="true">hz</span>HOWZERO</a>
+    <div class="navlinks"><a href="#schedule">일정</a><a href="#schedule" data-goto="caption">캡션</a><a href="#schedule" data-goto="perf">성과</a><a href="#rules">공통 세팅</a></div>
+    <div class="navright">
+      <a class="btn btn-ghost" href="https://www.instagram.com/howzero__/" target="_blank" rel="noopener">@howzero__</a>
+      <a class="btn btn-primary" href="#schedule">일정 보기</a>
+    </div>
+  </nav>
+
+  <section class="sec hero" id="top">
+    <div>
+      <span class="chip"><span class="dot"></span>이미 올린 5편 · 누적 조회 <b style="font-weight:600">14,561</b></span>
+      <h1>편집 끝난 릴스 5편,<br>오늘부터 하루 한 편</h1>
+      <p class="lead">날짜마다 영상 내용과 캡션을 정리했어요. 영상은 드라이브에서 바로 볼 수 있어요.</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" href="#schedule">일정 보기</a>
+        <a class="btn btn-outline btn-lg" href="#schedule" data-goto="perf">지난 성과</a>
+      </div>
+      <div class="connect">기준일 2026-11-03 <span class="pillchip">Instagram 릴스</span><span class="pillchip">1일 1릴스</span></div>
+    </div>
+    <div>
+      <div class="stack-head"><span>오늘 · 업로드 예정</span><span id="stackCount">5</span></div>
+      <div class="stack" id="stack"></div>
+    </div>
+  </section>
+
+  <section class="sec strip" aria-label="날짜">
+    <div class="cap">11/03부터 11/07까지 · 하루에 한 편</div>
+    <div class="daysrow" id="days"></div>
+  </section>
+
+  <section class="sec" id="schedule">
+    <h2>날짜별로 뭘 올리는지 한 화면에서 봐요</h2>
+    <p class="sub">왼쪽에서 편을 고르면 오른쪽에 내용이 나와요. 캡션 탭에서 바로 복사할 수 있어요.</p>
+    <div class="window">
+      <div class="chrome"><span class="lights" aria-hidden="true"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></span><span class="urlpill">🔒 howzero · 업로드 일정</span></div>
+      <div class="winbody">
+        <div class="winbar"><span class="hint">게시는 인스타에서 직접 해요. 이 화면은 일정 공유용이에요.</span><a class="btn btn-primary" href="https://www.instagram.com/howzero__/reels/" target="_blank" rel="noopener">인스타에서 보기</a></div>
+        <div class="seg"><div class="seg-in" role="tablist" aria-label="보기">
+          <button role="tab" id="tab-plan" aria-selected="true" aria-controls="p-plan">일정</button>
+          <button role="tab" id="tab-caption" aria-selected="false" aria-controls="p-caption">캡션</button>
+          <button role="tab" id="tab-perf" aria-selected="false" aria-controls="p-perf">성과</button>
+        </div></div>
+
+        <div class="panel on" id="p-plan" role="tabpanel" aria-labelledby="tab-plan">
+          <div class="split">
+            <div class="box">
+              <div class="box-head"><span class="ico check">✓</span>업로드 순서 · 하루 한 편</div>
+              <ul class="tree" id="treePlan"></ul>
+            </div>
+            <div class="box">
+              <div class="box-head"><span class="ico" aria-hidden="true">▤</span><span id="planHead">영상 내용</span>
+                <div class="doc-tools"><a class="btn btn-primary" id="planWatch" href="#" target="_blank" rel="noopener">▶ 영상 보기</a></div></div>
+              <div class="doc" id="planDoc"></div>
+              <div class="doc-foot"><span id="planFoot"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" id="p-caption" role="tabpanel" aria-labelledby="tab-caption">
+          <div class="split">
+            <div class="box">
+              <div class="box-head"><span class="ico check">✓</span>캡션 준비 · 5편 모두 완료</div>
+              <ul class="tree" id="treeCap"></ul>
+            </div>
+            <div class="box">
+              <div class="box-head"><span class="ico" aria-hidden="true">✎</span><span id="capHead">캡션</span>
+                <div class="doc-tools"><span class="mini-seg"><span class="on">미리보기</span></span>
+                <button class="iconbtn" id="copyBtn" type="button" aria-label="캡션 복사" title="복사"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div></div>
+              <div class="doc"><pre id="capDoc"></pre></div>
+              <div class="doc-foot"><span id="capFoot"></span><span class="toast" id="toast" aria-live="polite"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" id="p-perf" role="tabpanel" aria-labelledby="tab-perf">
+          <div class="box">
+            <div class="box-head"><span class="ico" aria-hidden="true">↗</span>이미 올린 5편 · 조회수</div>
+            <div class="perf" id="perf" style="margin-top:16px"></div>
+            <p class="small">11/03 오후 인스타 프로필에서 본 값이에요. 10편은 게시 14시간 뒤 값이라 더 오를 거예요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="rules">
+    <h2>매 편 올릴 때 같이 걸어 둘 것</h2>
+    <p class="sub">게시 전에 세 가지를 똑같이 세팅해요.</p>
+    <div class="feats">
+      <div class="feat"><span class="num">인포크</span><h3>맨 위 카드 교체</h3><p>이번 편 정리본을 맨 위 카드로 올리고 버튼은 '정리본 받기'로 둬요. 지난 카드는 오픈채팅방 아래로 내려요.</p></div>
+      <div class="feat"><span class="num">자동 DM</span><h3>모든 댓글에 발송</h3><p>인포크 매니저로 걸어요. 팔로우를 확인한 뒤 보내고, 댓글에 답글은 달지 않아요.</p></div>
+      <div class="feat"><span class="num">미리 걸기</span><h3>올리기 전에 세팅</h3><p>'다음에 올릴 게시물'에 미리 걸어 두고, 이미 달린 댓글은 7일 안에 한꺼번에 보내요.</p></div>
+    </div>
+  </section>
+
+  <footer><span>howzero · 인스타 릴스 업로드 일정</span><span>2026-11-03 기준</span></footer>
+</div>
+
+<script>
+const EPS = [{"date": "11/03", "dow": "화", "ep": "13", "title": "클로드 하는 말 그냥 믿으면 망합니다", "href": "https://drive.google.com/file/d/__ID13__/view", "summary": "클로드한테 \"내 말이 맞아?\"라고 물으면 맞다고 하고, \"별로지?\"라고 물어도 맞다고 해요. 그래서 카파시가 만든 무료 스킬 LLM 카운슬로 조언자 다섯 명(반대파·원리파·확장파·외부인·실행파)에게 따로 따져 보게 하고, 서로 평가하게 해요. 마지막에 의장이 결론 하나와 먼저 할 일 하나를 줘요. 뭘 만들지, 누굴 뽑을지처럼 되돌리기 힘든 결정에 쓰는 법이에요.", "length": "60.2초", "cta": "댓글 '카운슬' → DM", "caption": "클로드 하는 말 그냥 믿으면 망합니다. 뭘 물어도 맞다고 하거든요\n\nLLM 카운슬(LLM Council)은 카파시 방식으로 만든 무료 스킬이에요. 질문 하나를 조언자 5명이 따로 따져 보고, 누가 썼는지 가린 채 서로 평가해요.\n\n· 반대파부터 실행파까지 조언자 5명\n· 이름 가리고 서로 순위 매기기\n· 의장이 결론 1개 + 먼저 할 일 1개\n\n스킬은 무료지만, 5명이 각자 답하는 만큼 클로드 사용량은 몇 배로 들어요.\n그래서 뭘 만들지, 누굴 뽑을지처럼 되돌리기 힘든 결정에 써요.\n\n댓글에 '카운슬' 남기시면 설치 정리본 DM으로 보내 드려요.\n\n#의사결정 #클로드 #AI활용"}, {"date": "11/04", "dow": "수", "ep": "14", "title": "클로드 초기 세팅법, 왕초보 4단계", "href": "https://drive.google.com/file/d/__ID14__/view", "summary": "클로드를 처음 쓰는 사람을 위한 세팅 네 단계예요. ① 가입하고 컴퓨터 앱 받기 ② 프롬프트로 나를 알려 주고, 챗GPT·제미나이 기억 가져오기 ③ 개인·업무 프로젝트를 나눠 기억 따로 두기 ④ 막막하면 /setup-claude 치기. 끝에 자주 하는 일은 스킬로 만들어 두라는 꿀팁이 붙어요.", "length": "60.0초", "cta": "댓글 '왕초보' → DM", "caption": "클로드 처음이면 이 4단계만 세팅해 두세요\n\n클로드(Claude)는 가입하고 컴퓨터 앱을 받은 다음, 세 가지만 해 두면 매번 나를 다시 설명하지 않아도 돼요.\n\n· 프롬프트 하나로 나 알려 주기\n· 챗GPT·제미나이 기억 그대로 가져오기\n· 개인·업무 프로젝트로 기억 따로\n\n막막하면 /setup-claude를 치세요. 하는 일을 물어보고 맞는 걸 골라 줘요.\n개인 정보가 업무 파일에 섞이지 않게 프로젝트는 꼭 나눠 주세요.\n\n아무 댓글이나 남겨 주시면 4단계 프롬프트 정리본 DM으로 보내 드려요.\n\n#클로드세팅 #클로드 #AI자동화"}, {"date": "11/05", "dow": "목", "ep": "09", "title": "한도 걸려도 제발 결제하지 마세요", "href": "https://drive.google.com/file/d/12CKx4qJrLfonF2a2IPOeOM86_O4URnBg/view", "summary": "5시간·주간 한도에 걸렸을 때 한 달을 더 결제하지 말고 무료 예비 모델을 붙이라는 내용이에요. FreeLLMAPI가 여러 무료 모델을 주소 하나로 묶어 줘서, 상세페이지 이미지를 만들다 클로드가 끊겨도 같은 세션과 대화 흐름으로 끝까지 이어 가는 장면을 보여 줘요.", "length": "39.3초", "cta": "댓글 '무료 모델' → 정리본", "caption": "한도 걸려도 결제하지 마세요. 무료 예비 모델을 붙여 두면 돼요\n\nFreeLLMAPI는 무료 오픈소스예요. 여러 회사의 무료 모델을 주소 하나로 묶어 두고, 클로드가 한도에 걸리면 예비 모델이 이어서 일해요.\n\n· 무료 모델 470개 넘게 한곳에\n· 5시간·주간 한도 걸려도 작업 계속\n· 기존 세션, 대화 흐름 그대로\n\n무료 모델은 한도와 품질이 제각각이라 메인 대신이 아니라 예비로 쓰세요.\n설명서에 개인 실험·학습용이라고 적혀 있으니 고객 정보는 넣지 마세요.\n\n아무 댓글이나 남겨 주시면 설치 방법 정리본 보내 드려요.\n\n#클로드세팅 #FreeLLMAPI #AI자동화"}, {"date": "11/06", "dow": "금", "ep": "15", "title": "아직도 복붙해요? AI가 대신 눌러요", "href": "https://drive.google.com/file/d/__ID15__/view", "summary": "AI한테 일을 시켜도 복사·붙여넣기는 결국 내가 하던 문제를 다뤄요. 버셀이 무료로 푼 에이전트 데스크톱은 화면 사진으로 짐작하지 않고 버튼·칸 이름을 읽고 눌러서 엉뚱한 데를 덜 눌러요. 맥·윈도우가 되고 내 마우스를 뺏지 않아요. PC 카톡이나 주문번호를 택배 프로그램에 옮기는 일을 예로 들어요.", "length": "57.6초", "cta": "댓글 '데스크톱' → DM", "caption": "아직도 복붙하세요? 이제 AI가 내 컴퓨터를 직접 눌러요\n\n에이전트 데스크톱(agent-desktop)은 버셀이 공개한 무료 오픈소스예요. 화면 사진을 보고 짐작하지 않고, 프로그램 속 버튼 이름을 그대로 읽고 눌러요.\n\n· 깃허브 즐겨찾기 7,395개\n· 맥, 윈도우, 리눅스 다 지원\n· AI가 일해도 내 마우스는 그대로\n\n도구는 무료지만 일을 시키는 AI(클로드 코드 등) 사용료는 따로예요.\nAI가 읽는 화면에 대화·고객 정보가 담길 수 있으니 회사 PC는 권한부터 확인하세요.\n\n아무 댓글이나 남겨 주시면 설치부터 쓰는 법까지 정리본 DM으로 보내 드려요.\n\n#업무자동화 #에이전트데스크톱 #AI자동화"}, {"date": "11/07", "dow": "토", "ep": "11", "title": "이 아이템 팔릴까? AI 손님한테 물어봄", "href": "https://drive.google.com/file/d/1Nejwby8n8Xii1HOwkxqyHkKdBfAxQWC1/view", "summary": "사업 아이디어를 만들기 전에 AI 가짜 고객한테 먼저 시험해 보는 법이에요. 미로피쉬에 아이디어나 소개 자료를 올리면 성격·배경이 다른 AI 사람들로 가상 세상을 만들고, SNS에서 서로 반응하고 토론하게 해요. 끝나면 좋아한 이유와 싫어한 이유를 보고서로 주고, 그중 한 명과 따로 대화해 볼 수도 있어요.", "length": "39.7초", "cta": "댓글 '미로피쉬' → DM", "caption": "이 아이템 팔릴까? 만들기 전에 AI 손님들한테 먼저 물어볼 수 있어요\n\n미로피쉬(MiroFish)는 무료 오픈소스예요. 아이디어나 소개 자료를 올리면 성격이 다 다른 AI 사람들로 가상 세상을 만들고, 그 반응을 보여 줘요.\n\n· 깃허브 별 8만 개 넘음\n· AI 사람들끼리 SNS에서 반응·토론\n· 좋아한 이유, 싫어한 이유까지 보고서로\n\n코드는 무료지만 돌릴 때마다 AI 사용료가 따로 들어요. 처음엔 짧게 돌려 보세요.\nAI 반응은 실제 손님이 아니니 참고용으로만 보세요.\n\n아무 댓글이나 남겨 주시면 링크 정리본 보내 드려요.\n\n#창업아이디어 #미로피쉬 #AI자동화"}];
+const POSTED = [
+  {d:"10/28",ep:"06",t:"AI 결과물이 별로라면, '해줘'부터 쳐서 그래요",u:"https://www.instagram.com/reel/DfCLEJ-IuT8/",v:1774},
+  {d:"10/29",ep:"05",t:"메타가 만든 AI 앱, 8시간 만에 제 걸로",u:"https://www.instagram.com/reel/DfEvjAuIckY/",v:3671},
+  {d:"10/30",ep:"04",t:"블로그 제발 직접 쓰지 마세요",u:"https://www.instagram.com/reel/DfHYYVhIz-P/",v:6176},
+  {d:"10/31",ep:"08",t:"클로드한테 제발 바로 시키지 마세요",u:"https://www.instagram.com/reel/DfKBK9XIWGz/",v:294},
+  {d:"11/02",ep:"10",t:"클로드 초보라면 꼭 깔아야 할 무료 플러그인 5개",u:"https://www.instagram.com/reel/DfPDXh4oPrI/",v:2646}
+];
+const IG = '<svg class="ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>';
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const label = (e,i) => i===0 ? '오늘' : i===1 ? '내일' : e.date;
+
+// 히어로 알림 스택
+document.getElementById('stack').innerHTML = EPS.slice(0,3).map((e,i)=>{
+  if(i===0) return `<div class="note"><div class="note-row">${IG}${esc(e.ep)}편 · ${esc(e.title)}<span class="meta">오늘 업로드</span></div><p>${esc(e.summary.split('. ')[0])}.</p><div class="acts"><a class="btn btn-outline" href="#schedule" data-goto="caption" data-ep="${e.ep}">캡션</a><a class="btn btn-primary" href="${e.href}" target="_blank" rel="noopener">영상 보기</a></div></div>`;
+  return `<div class="note s${i+1}"><div class="note-row">${IG}${esc(e.ep)}편 · ${esc(e.title)}<span class="meta">${label(e,i)}</span></div></div>`;
+}).join('');
+
+// 날짜 줄
+document.getElementById('days').innerHTML = EPS.map((e,i)=>`<a class="daypill${i===0?' today':''}" href="#schedule" data-ep="${e.ep}"><b>${e.date}</b><span>${e.dow} · ${e.ep}편</span></a>`).join('');
+
+// 트리
+const tree = id => EPS.map((e,i)=>`<li tabindex="0" data-ep="${e.ep}"><span class="d">${e.date}</span><span class="t"><span class="tt">${esc(e.ep)}편 · ${esc(e.title)}</span><span class="st">${label(e,i)==='오늘'?'오늘 업로드':label(e,i)==='내일'?'내일 업로드':e.dow+'요일 업로드'}</span></span></li>`).join('');
+document.getElementById('treePlan').innerHTML = tree();
+document.getElementById('treeCap').innerHTML = tree();
+
+let current = EPS[0].ep;
+function select(ep){
+  current = ep;
+  const e = EPS.find(x=>x.ep===ep);
+  document.querySelectorAll('.tree li').forEach(li=>li.setAttribute('aria-current', li.dataset.ep===ep));
+  document.getElementById('planHead').textContent = `${e.date} ${e.dow} · ${e.ep}편`;
+  document.getElementById('planWatch').href = e.href;
+  document.getElementById('planDoc').innerHTML = `<h3>${esc(e.title)}</h3><p>${esc(e.summary)}</p><div class="kv">${e.length?`<span>길이 ${esc(e.length)}</span>`:''}<span>CTA ${esc(e.cta)}</span><span>캡션 준비됨</span></div>`;
+  document.getElementById('planFoot').textContent = `영상 보기 = 구글 드라이브 최종본`;
+  document.getElementById('capHead').textContent = `${e.ep}편 캡션`;
+  document.getElementById('capDoc').textContent = e.caption;
+  document.getElementById('capFoot').textContent = `최신 · ${e.caption.replace(/#\S+/g,'').replace(/\s/g,'').length}자 (해시태그 제외)`;
+  document.getElementById('toast').textContent = '';
+}
+function tab(name){
+  ['plan','caption','perf'].forEach(n=>{
+    document.getElementById('tab-'+n).setAttribute('aria-selected', n===name);
+    document.getElementById('p-'+n).classList.toggle('on', n===name);
+  });
+}
+document.querySelectorAll('[role=tab]').forEach(b=>b.addEventListener('click',()=>tab(b.id.slice(4))));
+document.querySelectorAll('.tree').forEach(t=>{
+  t.addEventListener('click',ev=>{const li=ev.target.closest('li'); if(li) select(li.dataset.ep)});
+  t.addEventListener('keydown',ev=>{const li=ev.target.closest('li'); if(li&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();select(li.dataset.ep)}});
+});
+document.addEventListener('click',ev=>{
+  const a = ev.target.closest('[data-goto],[data-ep]');
+  if(!a || a.closest('.tree')) return;
+  if(a.dataset.ep) select(a.dataset.ep);
+  tab(a.dataset.goto || 'plan');
+});
+document.getElementById('copyBtn').addEventListener('click',()=>{
+  const pre = document.getElementById('capDoc'), toast = document.getElementById('toast');
+  const fallback = ()=>{const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); toast.textContent='선택됨 · ⌘C로 복사';};
+  try{ navigator.clipboard.writeText(pre.textContent).then(()=>toast.textContent='복사됨', fallback); }catch(e){ fallback(); }
+});
+
+// 성과
+const max = Math.max(...POSTED.map(p=>p.v));
+document.getElementById('perf').innerHTML = POSTED.map(p=>`<div class="prow"><span class="d">${p.d}</span><span class="e">${p.ep}</span><span class="ptitle"><a href="${p.u}" target="_blank" rel="noopener">${esc(p.t)}</a><span class="ptrack"><i style="width:${(p.v/max*100).toFixed(1)}%"></i></span></span><span class="n">${p.v.toLocaleString('ko-KR')}</span></div>`).join('');
+
+select(current);
+</script>
+</body>
+</html>
